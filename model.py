@@ -104,6 +104,9 @@ def predictDisease(symptoms):
 	
 	final_prediction = mode([rf_prediction, nb_prediction, svm_prediction])[0][0]
 	predictions = {
+		"rf_model_prediction": rf_prediction,
+        "naive_bayes_prediction": nb_prediction,
+        "svm_model_prediction": svm_prediction,
 		"You may have":final_prediction
 	}
 	return predictions
