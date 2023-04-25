@@ -1,4 +1,6 @@
 # Importing libraries
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 import numpy as np
 import pandas as pd
 from scipy.stats import mode
@@ -66,8 +68,8 @@ svm_preds = final_svm_model.predict(test_X.values)
 nb_preds = final_nb_model.predict(test_X.values)
 rf_preds = final_rf_model.predict(test_X.values)
 
-final_preds = [mode([i,j,k])[0][0] for i,j,
-			k in zip(svm_preds, nb_preds, rf_preds)]
+final_preds = [mode([i,j,k])[0][0] for i,j,k in zip(svm_preds, nb_preds, rf_preds)]
+
 
 
 symptoms = X.columns.values
