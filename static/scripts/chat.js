@@ -1,7 +1,6 @@
 // Collapsible
 var coll = document.getElementsByClassName("collapsible");
-const questions = ['Please enter your name: ',"Please enter the symptoms: "]
-const name = ''
+const questions = ["Please enter the symptoms: "]
 const sypmtoms = []
 
 for (let i = 0; i < coll.length; i++) {
@@ -45,7 +44,7 @@ function firstBotMessage() {
 
     $("#chat-timestamp").append(time);
     document.getElementById("userInput").scrollIntoView(false);
-    let secondMessage= "Please enter your name: "
+    let secondMessage= "Please enter your Symptoms: "
     document.getElementById("botStarterMessage2").innerHTML = '<p class="botText"><span>' + secondMessage+ '</span></p>';
 
     time = getTime();

@@ -1,6 +1,8 @@
 # Importing libraries
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
+warnings.simplefilter(action='ignore', category=DeprecationWarning)
+
 import numpy as np
 import pandas as pd
 from scipy.stats import mode
@@ -15,7 +17,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
 
 data = pd.read_csv("Training.csv").dropna(axis = 1)
-
+Sym_desc = pd.read_csv("Symptom_Description.csv")
+Sym_pre = pd.read_csv("Symptom_Precaution.csv")
 
 disease_counts = data["prognosis"].value_counts()
 temp_df = pd.DataFrame({
@@ -103,16 +106,34 @@ def predictDisease(symptoms):
 	nb_prediction = data_dict["predictions_classes"][final_nb_model.predict(input_data)[0]]
 	svm_prediction = data_dict["predictions_classes"][final_svm_model.predict(input_data)[0]]
 	
-	
 	final_prediction = mode([rf_prediction, nb_prediction, svm_prediction])[0][0]
+	
+	# if final_prediction in Sym_desc['Disease'].values:
+	#     b = Sym_desc.loc[Sym_desc['Disease'] == final_prediction, 'description'].iloc[0]
+	# else:
+	#     b = "No description found for predicted disease."    
+    # if final_prediction in Sym_pre['Disease'].values:
+	# 	c = Sym_pre.loc[Sym_pre['Disease'] == final_prediction, ['a1', 'a2', 'a3', 'a4']].iloc[0]
+	# else:
+	#     c = "No Precautions found for predicted disease."
+
 	predictions = {
-		"rf_model_prediction": rf_prediction,
-        "naive_bayes_prediction": nb_prediction,
-        "svm_model_prediction": svm_prediction,
-		"You may have":final_prediction
+    	# "rf_model_prediction": rf_prediction,
+        # "naive_bayes_prediction": nb_prediction,
+        # "svm_model_prediction": svm_prediction,
+        
+		"Disease": final_prediction,
+        # "Description": b,
+        # "Precaution": c
 	}
+	
+    
 	return predictions
 
 
 a = input("Enter the symptoms: ")
-print(predictDisease(a))
+result = predictDisease(a)
+print(result["Disease"])
+# print(result["Description"])
+# print(result["Precaution"])
+
