@@ -1,7 +1,10 @@
 # Importing libraries
 import warnings
+# import pickle
 warnings.simplefilter(action='ignore', category=FutureWarning)
 warnings.simplefilter(action='ignore', category=DeprecationWarning)
+
+
 
 import numpy as np
 import pandas as pd
@@ -108,32 +111,41 @@ def predictDisease(symptoms):
 	
 	final_prediction = mode([rf_prediction, nb_prediction, svm_prediction])[0][0]
 	
-	# if final_prediction in Sym_desc['Disease'].values:
-	#     b = Sym_desc.loc[Sym_desc['Disease'] == final_prediction, 'description'].iloc[0]
-	# else:
-	#     b = "No description found for predicted disease."    
-    # if final_prediction in Sym_pre['Disease'].values:
-	# 	c = Sym_pre.loc[Sym_pre['Disease'] == final_prediction, ['a1', 'a2', 'a3', 'a4']].iloc[0]
-	# else:
-	#     c = "No Precautions found for predicted disease."
+	if final_prediction in Sym_desc['Disease'].values:
+		b = Sym_desc.loc[Sym_desc['Disease'] == final_prediction, 'description'].iloc[0]
+	else:
+		b = "No description found for predicted disease." 
 
-	predictions = {
-    	# "rf_model_prediction": rf_prediction,
-        # "naive_bayes_prediction": nb_prediction,
-        # "svm_model_prediction": svm_prediction,
-        
-		"Disease": final_prediction,
-        # "Description": b,
-        # "Precaution": c
-	}
+	if final_prediction in Sym_pre['Disease'].values:
+		c = Sym_pre.loc[Sym_pre['Disease'] == final_prediction, ['1', '2', '3', '4']].iloc[0]
+	else:
+		c = "No Precautions found for predicted disease."
+	
+	predictions = {"Disease": final_prediction,"Description": b,"Precaution": c.to_string()}
 	
     
 	return predictions
 
 
+# filename = 'saved_model1.sav'
+# pickle.dump(svm_model, open(filename, 'wb'))
+# filename = 'saved_model2.sav'
+# pickle.dump(nb_model, open(filename, 'wb'))
+# filename = 'saved_model3.sav'
+# pickle.dump(rf_model, open(filename, 'wb'))
+
+# loaded_model = pickle.load(open(filename, 'rb'))
+# result = loaded_model.predict(a)
+# loaded_model = pickle.load(open(filename, 'rb'))
+# result = loaded_model.predict(a)
+# loaded_model = pickle.load(open(filename, 'rb'))
+# result = loaded_model.predict(a)
+
+
+
 a = input("Enter the symptoms: ")
 result = predictDisease(a)
 print(result["Disease"])
-# print(result["Description"])
-# print(result["Precaution"])
+print(result["Description"])
+print(result["Precaution"])
 
