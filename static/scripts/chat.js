@@ -77,8 +77,7 @@ async function getBotResponse(input) {
     // }).then(function (data) {
     //     // Do something here
     // });
-    return 
-    $.ajax({
+    return $.ajax({
         url:'/chat_response',
         data:{data:input},
         type:'POST' 
@@ -93,7 +92,11 @@ async function getBotResponse(input) {
 async function getHardResponse(userText) {
     let botResponse = await getBotResponse(userText);
     console.log(botResponse);
-    let botHtml = '<p class="botText"><span>' + botResponse.res + '</span></p>';
+    let botHtml = '<p class="botText"><span>' + botResponse.disease + '</span></p>';
+    $("#chatbox").append(botHtml);
+    botHtml = '<p class="botText"><span>' + botResponse.description + '</span></p>';
+    $("#chatbox").append(botHtml);
+    botHtml = '<p class="botText"><span>' + botResponse.precaution + '</span></p>';
     $("#chatbox").append(botHtml);
 
     document.getElementById("chat-bar-bottom").scrollIntoView(true);

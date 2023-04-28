@@ -1,5 +1,5 @@
 import warnings
-import pickle
+import re
 import numpy as np
 import pandas as pd
 from scipy.stats import mode
@@ -119,10 +119,6 @@ def predictDisease(symptoms):
 
 
 
-a = input("Enter the symptoms: ")
- 
-result = predictDisease(a)
-print(result["Disease"])
-print(result["Description"])
-print(result["Precaution"])
+
+
 
