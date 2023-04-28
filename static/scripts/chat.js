@@ -92,12 +92,11 @@ async function getBotResponse(input) {
 async function getHardResponse(userText) {
     let botResponse = await getBotResponse(userText);
     console.log(botResponse);
-    let botHtml = '<p class="botText"><span>' + botResponse.disease + '</span></p>';
-    $("#chatbox").append(botHtml);
-    botHtml = '<p class="botText"><span>' + botResponse.description + '</span></p>';
-    $("#chatbox").append(botHtml);
-    botHtml = '<p class="botText"><span>' + botResponse.precaution + '</span></p>';
-    $("#chatbox").append(botHtml);
+    Object.values(botResponse).forEach(function (value) {
+        let botHtml = '<p class="botText"><span>' + value + '</span></p>';
+        $("#chatbox").append(botHtml);
+    })
+
 
     document.getElementById("chat-bar-bottom").scrollIntoView(true);
 }

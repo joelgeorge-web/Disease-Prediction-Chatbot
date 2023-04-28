@@ -38,16 +38,24 @@ def index():
 @app.route('/chat_response',methods=['GET','POST'])
 def python_logic2():
     if(request.method == 'POST'):
-        sym1 = request.form.get("data")
-        sym1 = re.split(r'[,]', sym1)
-        sym2 = [word.capitalize() for word in sym1]
-        a = ",".join(sym2)
-        
-        result = predictDisease(a)
-        print(result["Disease"])
-        print(result["Description"])
-        print(result["Precaution"])
-        return jsonify({'disease': result['Disease'], 'description': result['Description'], 'precaution': result['Precaution']})
+        try:
+            sym1 = request.form.get("data")
+            sym1 = re.split(r'[,]', sym1)
+            sym2 = []
+            for i in sym1:
+                i.title()
+                sym2.append(i.title())
+            print(sym2)
+            # sym2 = [word.capitalize() for word in sym1]
+            a = ",".join(sym2)
+            
+            result = predictDisease(a)
+            print(result["Disease"])
+            print(result["Description"])
+            print(result["Precaution"])
+            return jsonify({'aisease': result['Disease'], 'description': result['Description'], 'precaution': result['Precaution']})
+        except:
+            return jsonify({'disease':'Disease not found!'})
     else:
         return jsonify({})
     
