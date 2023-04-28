@@ -1,23 +1,16 @@
-# Importing libraries
 import warnings
-# import pickle
-warnings.simplefilter(action='ignore', category=FutureWarning)
-warnings.simplefilter(action='ignore', category=DeprecationWarning)
-
-
-
+import pickle
 import numpy as np
 import pandas as pd
 from scipy.stats import mode
-from scipy.stats import mode
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, confusion_matrix
+warnings.simplefilter(action='ignore', category=FutureWarning)
+warnings.simplefilter(action='ignore', category=DeprecationWarning)
+
 
 data = pd.read_csv("Training.csv").dropna(axis = 1)
 Sym_desc = pd.read_csv("Symptom_Description.csv")
@@ -94,8 +87,6 @@ data_dict = {
 
 def predictDisease(symptoms):
 	symptoms = symptoms.split(",")
-	
-
 	input_data = [0] * len(data_dict["symptom_index"])
 	for symptom in symptoms:
 		index = data_dict["symptom_index"][symptom]
@@ -127,23 +118,9 @@ def predictDisease(symptoms):
 	return predictions
 
 
-# filename = 'saved_model1.sav'
-# pickle.dump(svm_model, open(filename, 'wb'))
-# filename = 'saved_model2.sav'
-# pickle.dump(nb_model, open(filename, 'wb'))
-# filename = 'saved_model3.sav'
-# pickle.dump(rf_model, open(filename, 'wb'))
-
-# loaded_model = pickle.load(open(filename, 'rb'))
-# result = loaded_model.predict(a)
-# loaded_model = pickle.load(open(filename, 'rb'))
-# result = loaded_model.predict(a)
-# loaded_model = pickle.load(open(filename, 'rb'))
-# result = loaded_model.predict(a)
-
-
 
 a = input("Enter the symptoms: ")
+ 
 result = predictDisease(a)
 print(result["Disease"])
 print(result["Description"])
