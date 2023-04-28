@@ -1,20 +1,16 @@
-# Importing libraries
 import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
-warnings.simplefilter(action='ignore', category=DeprecationWarning)
-
+import re
 import numpy as np
 import pandas as pd
 from scipy.stats import mode
-from scipy.stats import mode
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, confusion_matrix
+warnings.simplefilter(action='ignore', category=FutureWarning)
+warnings.simplefilter(action='ignore', category=DeprecationWarning)
+
 
 data = pd.read_csv("Training.csv").dropna(axis = 1)
 Sym_desc = pd.read_csv("Symptom_Description.csv")
@@ -91,8 +87,6 @@ data_dict = {
 
 def predictDisease(symptoms):
 	symptoms = symptoms.split(",")
-	
-
 	input_data = [0] * len(data_dict["symptom_index"])
 	for symptom in symptoms:
 		index = data_dict["symptom_index"][symptom]
@@ -108,32 +102,23 @@ def predictDisease(symptoms):
 	
 	final_prediction = mode([rf_prediction, nb_prediction, svm_prediction])[0][0]
 	
-	# if final_prediction in Sym_desc['Disease'].values:
-	#     b = Sym_desc.loc[Sym_desc['Disease'] == final_prediction, 'description'].iloc[0]
-	# else:
-	#     b = "No description found for predicted disease."    
-    # if final_prediction in Sym_pre['Disease'].values:
-	# 	c = Sym_pre.loc[Sym_pre['Disease'] == final_prediction, ['a1', 'a2', 'a3', 'a4']].iloc[0]
-	# else:
-	#     c = "No Precautions found for predicted disease."
+	if final_prediction in Sym_desc['Disease'].values:
+		b = Sym_desc.loc[Sym_desc['Disease'] == final_prediction, 'description'].iloc[0]
+	else:
+		b = "No description found for predicted disease." 
 
-	predictions = {
-    	# "rf_model_prediction": rf_prediction,
-        # "naive_bayes_prediction": nb_prediction,
-        # "svm_model_prediction": svm_prediction,
-        
-		"Disease": final_prediction,
-        # "Description": b,
-        # "Precaution": c
-	}
+	if final_prediction in Sym_pre['Disease'].values:
+		c = Sym_pre.loc[Sym_pre['Disease'] == final_prediction, ['1', '2', '3', '4']].iloc[0]
+	else:
+		c = "No Precautions found for predicted disease."
+	
+	predictions = {"Disease": final_prediction,"Description": b,"Precaution": c.to_string()}
 	
     
 	return predictions
 
 
-a = input("Enter the symptoms: ")
-result = predictDisease(a)
-print(result["Disease"])
-# print(result["Description"])
-# print(result["Precaution"])
+
+
+
 

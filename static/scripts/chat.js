@@ -1,4 +1,6 @@
 // Collapsible
+
+
 var coll = document.getElementsByClassName("collapsible");
 const questions = ["Please enter the symptoms: "]
 const sypmtoms = []
@@ -55,7 +57,7 @@ function firstBotMessage() {
 
 firstBotMessage();
 
-function getBotResponse(input) {
+async function getBotResponse(input) {
     // Simple responses
     // if (input == "hello" || input == "hi" || input == "hey" || input == "hola" || input == "bonjour" || input == "greetings" || input == "sup" | input == "yo" ) {
     //     return "Hello there!";
@@ -64,20 +66,37 @@ function getBotResponse(input) {
     // } else {
     //     return "Try asking something else!";
     // }
-    $.getJSON('/get_response',
-        function(data) {
-            //do nothing
-        }
-    );
-    return false;
+    // response = 
+    // ajax.jsonRpc('/web/dataset/call_kw', 'call', {
+    //     'model': 'custom.model',
+    //     'method': 'my_function',
+    //     'args': [],
+    //     'kwargs': {
+    //         'context': {},
+    //     }
+    // }).then(function (data) {
+    //     // Do something here
+    // });
+    return $.ajax({
+        url:'/chat_response',
+        data:{data:input},
+        type:'POST' 
+    });
+    
+    // return false;
 
 }
 
 
 // Retrieves the response
-function getHardResponse(userText) {
-    let botResponse = getBotResponse(userText);
-    let botHtml = '<p class="botText"><span>' + botResponse + '</span></p>';
+async function getHardResponse(userText) {
+    let botResponse = await getBotResponse(userText);
+    console.log(botResponse);
+    let botHtml = '<p class="botText"><span>' + botResponse.disease + '</span></p>';
+    $("#chatbox").append(botHtml);
+    botHtml = '<p class="botText"><span>' + botResponse.description + '</span></p>';
+    $("#chatbox").append(botHtml);
+    botHtml = '<p class="botText"><span>' + botResponse.precaution + '</span></p>';
     $("#chatbox").append(botHtml);
 
     document.getElementById("chat-bar-bottom").scrollIntoView(true);
