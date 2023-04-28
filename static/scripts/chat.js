@@ -58,37 +58,19 @@ function firstBotMessage() {
 firstBotMessage();
 
 async function getBotResponse(input) {
-    // Simple responses
-    // if (input == "hello" || input == "hi" || input == "hey" || input == "hola" || input == "bonjour" || input == "greetings" || input == "sup" | input == "yo" ) {
-    //     return "Hello there!";
-    // } else if (input == "goodbye" || input == "bye" || input == "see you later" ) {
-    //     return "See you next time.";
-    // } else {
-    //     return "Try asking something else!";
-    // }
-    // response = 
-    // ajax.jsonRpc('/web/dataset/call_kw', 'call', {
-    //     'model': 'custom.model',
-    //     'method': 'my_function',
-    //     'args': [],
-    //     'kwargs': {
-    //         'context': {},
-    //     }
-    // }).then(function (data) {
-    //     // Do something here
-    // });
+  
     return $.ajax({
         url:'/chat_response',
         data:{data:input},
         type:'POST' 
     });
     
-    // return false;
+    
 
 }
 
 
-// Retrieves the response
+
 async function getHardResponse(userText) {
     let botResponse = await getBotResponse(userText);
     console.log(botResponse);

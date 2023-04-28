@@ -58,19 +58,6 @@ final_svm_model.fit(X.values, y)
 final_nb_model.fit(X.values, y)
 final_rf_model.fit(X.values, y)
 
-test_data = pd.read_csv("Testing.csv").dropna(axis=1)
-
-test_X = test_data.iloc[:, :-1]
-test_Y = encoder.transform(test_data.iloc[:, -1])
-
-svm_preds = final_svm_model.predict(test_X.values)
-nb_preds = final_nb_model.predict(test_X.values)
-rf_preds = final_rf_model.predict(test_X.values)
-
-final_preds = [mode([i,j,k])[0][0] for i,j,k in zip(svm_preds, nb_preds, rf_preds)]
-
-
-
 symptoms = X.columns.values
 
 
