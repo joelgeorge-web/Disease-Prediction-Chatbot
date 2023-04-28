@@ -13,8 +13,8 @@ warnings.simplefilter(action='ignore', category=DeprecationWarning)
 
 
 data = pd.read_csv("Training.csv").dropna(axis = 1)
-Sym_desc = pd.read_csv("Symptom_Description.csv")
-Sym_pre = pd.read_csv("Symptom_Precaution.csv")
+Sym_desc = pd.read_csv("symptom_Description.csv")
+Sym_pre = pd.read_csv("symptom_precaution.csv")
 
 disease_counts = data["prognosis"].value_counts()
 temp_df = pd.DataFrame({
