@@ -21,7 +21,7 @@ def python_logic2():
             print(sym2)
             
             a = ",".join(sym2)
-            
+            a = a.replace(" ","")
             result = predictDisease(a)
             print(result["Disease"])
             print(result["Description"])
