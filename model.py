@@ -103,9 +103,3 @@ def predictDisease(symptoms):
 	
     
 	return predictions
-
-
-
-
-
-
