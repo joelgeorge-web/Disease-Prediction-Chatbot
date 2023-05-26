@@ -1,6 +1,8 @@
 from model import predictDisease
 import re
 from flask import Flask, request, jsonify, render_template
+import webbrowser
+import threading
 
 app = Flask(__name__)
 
@@ -35,5 +37,10 @@ def python_logic2():
     
 
 
-if __name__ == "__main__":  
-    app.run(debug=True)
+
+def open_browser():
+    webbrowser.open_new('http://127.0.0.1:5000/')
+
+if __name__ == '__main__':
+    threading.Timer(1.25, open_browser).start()
+    app.run(host='0.0.0.0',port = 5000)
