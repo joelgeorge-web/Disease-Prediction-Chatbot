@@ -74,6 +74,8 @@ data_dict = {
 
 def predictDisease(symptoms):
 	symptoms = symptoms.split(",")
+	# Replace underscores with spaces in symptom names containing underscores
+	symptoms = [symptom.replace('_', ' ') if '_' in symptom else symptom for symptom in symptoms]
 	input_data = [0] * len(data_dict["symptom_index"])
 	for symptom in symptoms:
 		index = data_dict["symptom_index"][symptom]

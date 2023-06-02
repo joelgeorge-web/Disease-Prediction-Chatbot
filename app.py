@@ -60,8 +60,9 @@ def python_logic2():
 
             sym2 = []
             for i in corrected_symptoms:
-                i.title()
-                sym2.append(i.title())
+                i = i.title()
+                sym2.append(i)
+
             print(sym2)
             
             a = ",".join(sym2)
