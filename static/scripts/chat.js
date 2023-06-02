@@ -46,7 +46,7 @@ function firstBotMessage() {
 
     $("#chat-timestamp").append(time);
     document.getElementById("userInput").scrollIntoView(false);
-    let secondMessage= "Please enter atleast 4 Symptoms: "
+    let secondMessage= "Please enter atleast 5 Symptoms: "
     document.getElementById("botStarterMessage2").innerHTML = '<p class="botText"><span>' + secondMessage+ '</span></p>';
 
     time = getTime();

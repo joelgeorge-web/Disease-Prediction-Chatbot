@@ -63,18 +63,21 @@ def python_logic2():
                 i = i.title()
                 sym2.append(i)
 
-            print(sym2)
-            
             a = ",".join(sym2)
-            
             a = a.replace(", ", ",")
+
+            if a.lower() == "hello" or a.lower() == "hi":
+                return jsonify({'response': 'Hello there!'})
+            elif a.lower() == "bye" or a.lower() == "goodbye":
+                return jsonify({'response': 'Goodbye!'})
+
             result = predictDisease(a)
             print(result["Disease"])
             print(result["Description"])
             print(result["Precaution"])
             return jsonify({'aisease': result['Disease'], 'description': result['Description'], 'precaution': result['Precaution']})
         except:
-            return jsonify({'disease':'Disease not found!'})
+            return jsonify({'disease':'Disease cannot be found!'})
     else:
         return jsonify({})
     
