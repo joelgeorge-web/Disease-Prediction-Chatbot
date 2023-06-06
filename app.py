@@ -70,6 +70,18 @@ def python_logic2():
                 return jsonify({'response': 'Hello there!'})
             elif a.lower() == "bye" or a.lower() == "goodbye":
                 return jsonify({'response': 'Goodbye!'})
+            elif a.lower() == "where you from?" or a.lower() == "where are you from?":
+                return jsonify({'response': "Place where you don't know!"})
+            elif a.lower() == "what are the symptoms of covid?" or a.lower() == "tell me about covid symptoms":
+                return jsonify({'response': "Common symptoms of COVID-19 include fever, cough, and difficulty breathing."})
+            elif a.lower() == "how can i prevent covid?" or a.lower() == "what measures should I take to avoid covid?":
+                return jsonify({'response': "To prevent COVID-19, you should practice good hand hygiene, wear a mask, maintain physical distance, and follow local health guidelines."})
+            elif a.lower() == "what should i do if i have a fever?" or a.lower() == "how to treat a fever?":
+                return jsonify({'response': "If you have a fever, it's important to rest, stay hydrated, and take over-the-counter fever-reducing medication as directed. If the fever persists or worsens, consult a healthcare professional."})
+            elif a.lower() == "what should i do if i have a cough?" or a.lower() == "how to treat a cough?":
+                return jsonify({'response': "If you have a cough, it's important to rest, stay hydrated, and take over-the-counter cough medication as directed. If the cough persists or worsens, consult a healthcare professional."})
+            
+            
 
             result = predictDisease(a)
             print(result["Disease"])
