@@ -10,7 +10,7 @@
     color: white;
     cursor: pointer;
     padding: 18px;
-    width: 350px;
+    width: 500px;
     text-align: left;
     outline: none;
     font-size: 18px;
@@ -26,8 +26,16 @@
     background-color: #f1f1f1;
 }
 
+
+
+.outer-container {
+    min-height: 500px;
+    bottom: 0%;
+    position: relative;
+}
+
 .full-chat-block {
-    width: 350px;
+    width: 500px; /* Increase the width as per your preference */
     background: white;
     text-align: center;
     overflow: auto;
@@ -36,21 +44,15 @@
     transition: max-height 0.2s ease-out;
 }
 
-.outer-container {
-    min-height: 500px;
-    bottom: 0%;
-    position: relative;
-}
-
 .chat-container {
-    max-height: 500px;
+    max-height: 500px; /* Increase the max-height as per your preference */
     width: 100%;
     position: absolute;
     bottom: 0;
     left: 0;
     scroll-behavior: smooth;
-    hyphens: auto;
 }
+
 
 .chat-container::-webkit-scrollbar {
     display: none;
@@ -65,26 +67,13 @@
     align-items: center;
     background-color: rgb(235, 235, 235);
     border-radius: 10px 10px 0px 0px;
-    padding: 10px 0px 10px 10px;
+    padding: 10px;
 }
 
-.chat-bar-icons {
-    display: flex;
-    justify-content: space-evenly;
-    box-sizing: border-box;
-    width: 25%;
-    float: right;
-    font-size: 20px;
-}
 
-#chat-icon:hover {
-    opacity: .7;
-}
-
-/* Chat bubbles */
 
 #userInput {
-    width: 75%;
+    width: 100%;
 }
 
 .input-box {

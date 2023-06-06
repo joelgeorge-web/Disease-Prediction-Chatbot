@@ -22,8 +22,13 @@ for (let i = 0; i < coll.length; i++) {
 
 function getTime() {
     let today = new Date();
-    hours = today.getHours();
-    minutes = today.getMinutes();
+    let hours = today.getHours();
+    let minutes = today.getMinutes();
+    let ampm = hours >= 12 ? 'PM' : 'AM';
+
+    // Convert hours to 12-hour format
+    hours = hours % 12;
+    hours = hours ? hours : 12;
 
     if (hours < 10) {
         hours = "0" + hours;
@@ -33,9 +38,11 @@ function getTime() {
         minutes = "0" + minutes;
     }
 
-    let time = hours + ":" + minutes;
+    let time = hours + ":" + minutes + " " + ampm;
+    console.log(time);
     return time;
 }
+
 
 // Gets the first message
 function firstBotMessage() {
@@ -46,12 +53,12 @@ function firstBotMessage() {
 
     $("#chat-timestamp").append(time);
     document.getElementById("userInput").scrollIntoView(false);
-    let secondMessage= "Please enter atleast 5 Symptoms: "
+    let secondMessage= "Please enter your symptoms: "
     document.getElementById("botStarterMessage2").innerHTML = '<p class="botText"><span>' + secondMessage+ '</span></p>';
 
-    time = getTime();
+    // time = getTime();
 
-    $("#chat-timestamp").append(time);
+    // $("#chat-timestamp").append(time);
     document.getElementById("userInput").scrollIntoView(false);
 }
 

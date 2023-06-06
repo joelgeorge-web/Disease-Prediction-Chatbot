@@ -81,15 +81,17 @@ def python_logic2():
             elif a.lower() == "what should i do if i have a cough?" or a.lower() == "how to treat a cough?":
                 return jsonify({'response': "If you have a cough, it's important to rest, stay hydrated, and take over-the-counter cough medication as directed. If the cough persists or worsens, consult a healthcare professional."})
             
-            
-
+        
             result = predictDisease(a)
-            print(result["Disease"])
-            print(result["Description"])
-            print(result["Precaution"])
-            return jsonify({'aisease': result['Disease'], 'description': result['Description'], 'precaution': result['Precaution']})
+
+            precaution_list = result["Precaution"].split(", ")  # Split the precaution string into a list
+            precaution_string = "\n".join(precaution_list)  # Join the list elements with newline characters
+            
+            doctor_msg = "This is a prediction, You should consult a doctor!"
+
+            return jsonify({'aisease': result['Disease'], 'description': result['Description'], 'precaution': precaution_string.replace('\n', '<br>'), 'zoctormsg': doctor_msg})
         except:
-            return jsonify({'disease':'Disease cannot be found!'})
+            return jsonify({'disease':'Incorrect prompt! Please try again'})
     else:
         return jsonify({})
     
