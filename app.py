@@ -50,13 +50,13 @@ def python_logic2():
             sym1 = request.form.get("data")
             sym1 = re.split(r'[,]', sym1)
             corrected_symptoms = []
-
+            wrong_symptoms = []
             for symptom in sym1:
                 corrected_symptom = difflib.get_close_matches(symptom, symptoms, n=1)
                 if corrected_symptom:
                     corrected_symptoms.append(corrected_symptom[0])
                 else:
-                    corrected_symptoms.append(symptom)
+                    wrong_symptoms.append(symptom)
 
             sym2 = []
             for i in corrected_symptoms:
@@ -81,9 +81,20 @@ def python_logic2():
             elif a.lower() == "what should i do if i have a cough?" or a.lower() == "how to treat a cough?":
                 return jsonify({'response': "If you have a cough, it's important to rest, stay hydrated, and take over-the-counter cough medication as directed. If the cough persists or worsens, consult a healthcare professional."})
             
-        
-            result = predictDisease(a)
+            sg = len(sym2)
+            wg = len(wrong_symptoms)
+            s = sg + wg
+            if s < 4:
+                return jsonify({'response': 'Please enter at least 3 symptoms!'})
+            else:
+                if wrong_symptoms:
+                    wrong_symptom_str = ' and '.join(['\"' + wrong + '\"' for wrong in wrong_symptoms])
+                    response_msg = 'The symptoms ' + wrong_symptom_str + ' is not in our dataset. Please try again!'
+                    return jsonify({'response': response_msg})
+                else:
+                    result = predictDisease(a)
 
+            
             precaution_list = result["Precaution"].split(", ")  # Split the precaution string into a list
             precaution_string = "\n".join(precaution_list)  # Join the list elements with newline characters
             
