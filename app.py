@@ -87,7 +87,7 @@ def python_logic2():
             precaution_list = result["Precaution"].split(", ")  # Split the precaution string into a list
             precaution_string = "\n".join(precaution_list)  # Join the list elements with newline characters
             
-            doctor_msg = "This is a prediction, You should consult a doctor!"
+            doctor_msg = "It is essential to consult healthcare professionals for accurate diagnosis and treatment!"
 
             return jsonify({'aisease': result['Disease'], 'description': result['Description'], 'precaution': precaution_string.replace('\n', '<br>'), 'zoctormsg': doctor_msg})
         except:
