@@ -65,27 +65,16 @@ def python_logic2():
 
             a = ",".join(sym2)
             a = a.replace(", ", ",")
-
-            if a.lower() == "hello" or a.lower() == "hi":
-                return jsonify({'response': 'Hello there!'})
-            elif a.lower() == "bye" or a.lower() == "goodbye":
-                return jsonify({'response': 'Goodbye!'})
-            elif a.lower() == "where you from?" or a.lower() == "where are you from?":
-                return jsonify({'response': "Place where you don't know!"})
-            elif a.lower() == "what are the symptoms of covid?" or a.lower() == "tell me about covid symptoms":
-                return jsonify({'response': "Common symptoms of COVID-19 include fever, cough, and difficulty breathing."})
-            elif a.lower() == "how can i prevent covid?" or a.lower() == "what measures should I take to avoid covid?":
-                return jsonify({'response': "To prevent COVID-19, you should practice good hand hygiene, wear a mask, maintain physical distance, and follow local health guidelines."})
-            elif a.lower() == "what should i do if i have a fever?" or a.lower() == "how to treat a fever?":
-                return jsonify({'response': "If you have a fever, it's important to rest, stay hydrated, and take over-the-counter fever-reducing medication as directed. If the fever persists or worsens, consult a healthcare professional."})
-            elif a.lower() == "what should i do if i have a cough?" or a.lower() == "how to treat a cough?":
-                return jsonify({'response': "If you have a cough, it's important to rest, stay hydrated, and take over-the-counter cough medication as directed. If the cough persists or worsens, consult a healthcare professional."})
-            
             sg = len(sym2)
             wg = len(wrong_symptoms)
             s = sg + wg
             if s < 4:
-                return jsonify({'response': 'Please enter at least 3 symptoms!'})
+                if wrong_symptoms[0].lower() == "hello" or wrong_symptoms[0].lower() == "hi":
+                    return jsonify({'response': 'Hello there!'})
+                elif wrong_symptoms[0].lower() == "bye" or wrong_symptoms[0].lower() == "goodbye":
+                    return jsonify({'response': 'Goodbye!'})
+                else:    
+                    return jsonify({'response': 'Please enter at least 3 symptoms!'})
             else:
                 if wrong_symptoms:
                     wrong_symptom_str = ' and '.join(['\"' + wrong + '\"' for wrong in wrong_symptoms])
