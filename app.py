@@ -69,7 +69,7 @@ def python_logic2():
             wg = len(wrong_symptoms)
             s = sg + wg
             if s < 4:
-                 return jsonify({'response': 'Please enter at least 3 symptoms!'})
+                 return jsonify({'response': 'Please enter at least 4 symptoms!'})
             else:
                 if wrong_symptoms:
                     wrong_symptom_str = ' and '.join(['\"' + wrong + '\"' for wrong in wrong_symptoms])
