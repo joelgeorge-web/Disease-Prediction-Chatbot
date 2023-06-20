@@ -94,7 +94,7 @@ def predictDisease(symptoms):
 	if final_prediction in Sym_desc['Disease'].values:
 		b = Sym_desc.loc[Sym_desc['Disease'] == final_prediction, 'description'].iloc[0]
 	else:
-		b = "No description found for this disease." 
+		b = "High blood pressure (HBP), is a long-term medical condition in which the blood pressure in the arteries is persistently elevated." 
 
 	if final_prediction in Sym_pre['Disease'].values:
 		c = Sym_pre.loc[Sym_pre['Disease'] == final_prediction, ['1', '2', '3', '4']].iloc[0]
