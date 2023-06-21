@@ -10,7 +10,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 warnings.simplefilter(action='ignore', category=FutureWarning)
 warnings.simplefilter(action='ignore', category=DeprecationWarning)
-
+from sklearn.metrics import accuracy_score
 
 data = pd.read_csv("Training.csv").dropna(axis = 1)
 Sym_desc = pd.read_csv("symptom_Description.csv")
@@ -89,6 +89,20 @@ def predictDisease(symptoms):
 	nb_prediction = data_dict["predictions_classes"][final_nb_model.predict(input_data)[0]]
 	svm_prediction = data_dict["predictions_classes"][final_svm_model.predict(input_data)[0]]
 	
+	# Calculate accuracy score for SVM model
+	svm_accuracy = accuracy_score(y_test, preds)
+
+	# Calculate accuracy score for Naive Bayes model
+	nb_accuracy = accuracy_score(y_test, preds)
+
+	# Calculate accuracy score for Random Forest model
+	rf_accuracy = accuracy_score(y_test, preds)
+
+	print("SVM Accuracy:", svm_accuracy)
+	print("Naive Bayes Accuracy:", nb_accuracy)
+	print("Random Forest Accuracy:", rf_accuracy)
+
+
 	final_prediction = mode([rf_prediction, nb_prediction, svm_prediction])[0][0]
 	
 	if final_prediction in Sym_desc['Disease'].values:
