@@ -73,7 +73,7 @@ def python_logic2():
             else:
                 if wrong_symptoms:
                     wrong_symptom_str = ' and '.join(['\"' + wrong + '\"' for wrong in wrong_symptoms])
-                    response_msg = 'The symptoms ' + wrong_symptom_str + ' is not in our dataset. Please try again!'
+                    response_msg = 'The symptoms ' + wrong_symptom_str + ' is not in our database. Please try again!'
                     return jsonify({'response': response_msg})
                 else:
                     result = predictDisease(a)
